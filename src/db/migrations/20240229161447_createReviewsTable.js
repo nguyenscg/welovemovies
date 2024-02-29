@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table
             .foreign("critic_id"); // foreign key | a reference ID to a particular critic
             .foreign("movie_id"); // foreign key | a reference ID to a particular movie
+        table.timestamps(true, true);
     })
 };
 
