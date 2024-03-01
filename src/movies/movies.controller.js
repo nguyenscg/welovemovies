@@ -15,11 +15,21 @@ async function movieExists(req, res, next) {
     next({ status: 404, message: `Movie cannot be found.` });
 }
 
-function read(req, res) {
+async function read(req, res) {
     const { movie } = res.locals;
     res.json({ movie });
 }
 
+async function getTheaters(req, res) {
+    const { movieId } = req.params;
+    const theaters = await moviesService.getTheaters(movieId)
+    res.json({ data: theaters });
+}
+
+async function getReviews(req, res) {
+    const { movieId } = req.params;
+    const reviews = await moviesService.getReviews(movieId);
+}
 
 module.exports = {
     read: [asyncErrorBoundary(movieExists), read],
