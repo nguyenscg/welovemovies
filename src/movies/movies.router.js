@@ -1,14 +1,20 @@
 const router = require("express").Router(); // require express router instance
 const controller = require("./movies.controller"); // require movies controller
 
-// GET all movies
-// This route will return a list of all movies. Different query parameters will allow for limiting the data that is returned.
 router
-    .route("/")
+  .route("/:movieId/theaters")
+  .get(controller.getReviews);
+
+router
+  .route("/:movieId/reviews")
+  .get("controller.getTheaters");
+
+router
+    .route("/") // GET /movies endpoint
     .get(controller.list);
 
 router 
-    .route("/:movieId")
+    .route("/:movieId") // GET /movies/:movieId endpoint
     .get(controller.read);
 
 // GET movies

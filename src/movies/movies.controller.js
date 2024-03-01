@@ -29,6 +29,7 @@ async function getTheaters(req, res) {
 async function getReviews(req, res) {
     const { movieId } = req.params;
     const reviews = await moviesService.getReviews(movieId);
+    res.json({ data: reviews });
 }
 
 module.exports = {
