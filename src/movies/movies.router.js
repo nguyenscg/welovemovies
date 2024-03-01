@@ -1,5 +1,6 @@
 const router = require("express").Router(); // require express router instance
 const controller = require("./movies.controller"); // require movies controller
+const methodNotAllowed = require("../errors/methodNotAllowed");
 
 router
   .route("/:movieId/theaters")
