@@ -33,8 +33,16 @@ function getTheaters(movie_id) {
 
 // GET /movies/:movieId/reviews
 // this route should return all the 'reviews' for the movie, including all the 'critic' details added to a 'critic' key of the review
+function getReviews(movie_id) {
+    return knex("reviews as r")
+    .join("critics as c", "r.critic_id", "c.critic_id")
+    .select("r*")
+    .where({ "r.movie_id": movie_id })
+}
+
 module.exports = {
     list,
     read,
     getTheaters,
+    getReviews
 }
