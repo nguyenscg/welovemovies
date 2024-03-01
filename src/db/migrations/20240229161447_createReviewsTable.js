@@ -7,15 +7,15 @@ exports.up = function(knex) {
         table.integer("critic_id").unsigned().notNullable();
         table
             .foreign("critic_id") // foreign key | a reference ID to a particular critic
-            .references("critics_id")
+            .references("critic_id")
             .inTable("critics")
-            .onDelete("cascade");
+            .onDelete("CASCADE");
         table.integer("movie_id").unsigned().notNullable();
         table
             .foreign("movie_id") // foreign key | a reference ID to a particular movie
             .references("movie_id")
             .inTable("movies")
-            .onDelete("cascade");
+            .onDelete("CASCADE");
         table.timestamps(true, true);
     })
 };
