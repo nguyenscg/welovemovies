@@ -1,4 +1,5 @@
 const moviesService = require("./movies.service");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function list(req, res) {
     const data = await moviesService.list(); // execute knex query to list all movies
@@ -21,6 +22,6 @@ function read(req, res) {
 
 
 module.exports = {
-    read: [movieExists, read],
-    list,
+    read: [asyncErrorBoundary(movieExists), read],
+    list: asyncErrorBoundary(list),
 };
