@@ -9,10 +9,10 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 async function list(req, res, next) {
     const isShowing = req.query.is_showing;
 
-    if (isShowing) {
+    if (isShowing) { // if the movie is being shown in theaters, only list those movies
         res.json({ data: await service.listMovie() })
     } else {
-        res.json({ data: await moviesService.list() })
+        res.json({ data: await moviesService.list() }) // otherwise list all the movies
     } 
 }
 
