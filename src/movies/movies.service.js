@@ -5,14 +5,6 @@ function list() { // GET all /movies endpoint
     return knex("movies").select("*"); // knex query from movies table and return list of all movies
 }
 
-function read(movie_id) { // GET /movies/:movieId endpoint
-    return knex("movies").select("*").where({ movie_id }).first();
-}
-
-
-// GET /movies?is_showing=true
-// In the event where `is_showing=true` is provided, the route should return _only those movies where the movie is currently showing in theaters._ This means you will need to check the `movies_theaters` table.
-
 // READ one movie
 // this route will return a single movie by ID
 /* four cases to consider
@@ -20,6 +12,24 @@ function read(movie_id) { // GET /movies/:movieId endpoint
 - `GET /movies/:movieId` (incorrect ID)
 - `GET /movies/:movieId/theaters`
 - `GET /movies/:movieId/reviews` */
+function read(movie_id) { // GET /movies/:movieId endpoint
+    return knex("movies").select("*").where({ movie_id }).first();
+}
+
+
+// GET /movies?is_showing=true
+// In the event where `is_showing=true` is provided, the route should return _only those movies where the movie is currently showing in theaters._ This means you will need to check the `movies_theaters` table.
+function getMoviesShowing() {
+    return knex("movies as m")
+    .join("movies_theaters as mt", "mt.movie_id", "m.movie_id")
+    .select("m.movie_id",
+            "m.title",
+            "m.runtime_in_minutes",
+            "rating",
+            "description",
+            "image_url")
+    .where({ is_showing: true })
+}
 
 // GET /movies/:movieId/theaters
 // this route should return all 'theaters' where the movie is playing. that means you need to check 'movies_theaters' table
@@ -43,6 +53,7 @@ function getReviews(movie_id) {
 module.exports = {
     list,
     read,
+    getMoviesShowing,
     getTheaters,
     getReviews
 }

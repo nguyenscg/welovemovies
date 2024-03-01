@@ -1,10 +1,8 @@
 const moviesService = require("./movies.service");
 
-function list(req, res, next) {
-    moviesService
-    .list()
-    .then((data) => res.json({ data }))
-    .catch(next);
+async function list(req, res) {
+    const data = await moviesService.list(); // execute knex query to list all movies
+    res.json({ data });
 }
 
 function movieExists(req, res, next) {
