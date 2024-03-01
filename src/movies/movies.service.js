@@ -5,6 +5,15 @@ function list() { // GET all /movies endpoint
     return knex("movies").select("*"); // knex query from movies table and return list of all movies
 }
 
+function listMovie() {
+    return knex("movies as m")
+        .join("movies_theaters as mt", "m.movie_id", "mt.movie_id")
+        .select("m.*")
+        .where({ "mt.is_showing": true })
+        .groupBy({ "m.movie_id" })
+}
+
+
 // READ one movie
 // this route will return a single movie by ID
 /* four cases to consider
@@ -52,6 +61,7 @@ function getReviews(movie_id) {
 
 module.exports = {
     list,
+    listMovie,
     read,
     getMoviesShowing,
     getTheaters,
