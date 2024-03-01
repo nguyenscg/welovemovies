@@ -75,4 +75,5 @@ The response _must_ have `404` as the status code.
 // this route should return all the 'reviews' for the movie, including all the 'critic' details added to a 'critic' key of the review
 module.exports = {
     list,
+    read,
 }
