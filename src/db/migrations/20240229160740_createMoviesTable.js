@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string("title"); // the title of the movie. data type: string
         table.integer("runtime_in_minutes"); // length of the movie in minutes. data type: integer
         table.string("rating"); // rating given to the movie. data type: string
-        table.string("description"); // a shortened description of the movie. data type: string
+        table.text("description"); // a shortened description of the movie. data type: text
         table.string("image_url"); // a url to the movie's poster. data type: string
         table.timestamps(true, true);
     })
