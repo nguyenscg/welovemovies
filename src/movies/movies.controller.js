@@ -35,4 +35,6 @@ async function getReviews(req, res) {
 module.exports = {
     read: [asyncErrorBoundary(movieExists), read],
     list: asyncErrorBoundary(list),
+    getReviews,
+    getTheaters,
 };
