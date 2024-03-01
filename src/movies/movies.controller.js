@@ -16,13 +16,12 @@ function movieExists(req, res, next) {
             return next();
         }
         next({ status: 404, message: `Movie cannot be found.` })
-    })
-    .catch(next);
+    });
 }
 
 function read(req, res) {
-    const { movie: data } = res.locals;
-    res.json({ data });
+    const { movie } = res.locals;
+    res.json({ movie });
 }
 
 
