@@ -4,6 +4,7 @@ const controller = require("./movies.controller"); // require movies controller
 // GET all movies
 // This route will return a list of all movies. Different query parameters will allow for limiting the data that is returned.
 router.route("/").get(controller.list);
+router.route("/:movieId").get(controller.read);
 
 // GET movies
 /* ```json
