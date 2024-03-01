@@ -5,8 +5,8 @@ function list() { // GET all /movies endpoint
     return knex("movies").select("*"); // knex query from movies table and return list of all movies
 }
 
-function read(movieId) { // GET /movies/:movieId endpoint
-    return knex("movies").select("*").where({ movie_id: movieId }).first();
+function read(movie_id) { // GET /movies/:movieId endpoint
+    return knex("movies").select("*").where({ movie_id }).first();
 }
 
 // GET movies
