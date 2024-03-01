@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable("movies", (table) => {
-        table.incremenets("movies_id").primary(); // sets 'movies_id' as primary key; unique ID
+        table.incremenets("movie_id").primary(); // sets 'movies_id' as primary key; unique ID
         table.string("title"); // the title of the movie. data type: string
         table.integer("runtime_in_minutes"); // length of the movie in minutes. data type: integer
         table.string("rating"); // rating given to the movie. data type: string
