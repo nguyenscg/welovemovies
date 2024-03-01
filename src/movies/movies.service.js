@@ -10,7 +10,7 @@ function listMovie() {
         .join("movies_theaters as mt", "m.movie_id", "mt.movie_id")
         .select("m.*")
         .where({ "mt.is_showing": true })
-        .groupBy({ "m.movie_id" })
+        .groupBy("m.movie_id")
 }
 
 
