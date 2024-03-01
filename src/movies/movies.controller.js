@@ -5,16 +5,13 @@ async function list(req, res) {
     res.json({ data });
 }
 
-function movieExists(req, res, next) {
-    moviesService
-    .read(req.params.movieId)
-    .then((movie) => {
-        if (movie) {
-            res.locals.movie = movie;
-            return next();
-        }
-        next({ status: 404, message: `Movie cannot be found.` })
-    });
+async function movieExists(req, res, next) {
+    const movie = await moviesService.read(req.params.movie_id);
+    if (movie) {
+        res.locals.movie = movie;
+        return next();
+    }
+    next({ status: 404, message: `Movie cannot be found.` });
 }
 
 function read(req, res) {
