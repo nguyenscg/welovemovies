@@ -21,13 +21,13 @@ async function read(req, res) {
 }
 
 async function getTheaters(req, res) {
-    const { movieId } = req.params;
+    const movieId = req.params.movie_id;
     const theaters = await moviesService.getTheaters(movieId)
     res.json({ data: theaters });
 }
 
 async function getReviews(req, res) {
-    const { movieId } = req.params;
+    const movieId = req.params.movie_id;
     const reviews = await moviesService.getReviews(movieId);
     res.json({ data: reviews });
 }
