@@ -17,17 +17,17 @@ async function list(req, res, next) {
 }
 
 async function movieExists(req, res, next) {
-    const movie = await service.read(req.params.movie_id);
-    if (movie) {
-        res.locals.movie = movie;
+    const movie = await service.read(req.params.movie_id); // query the movie_id
+    if (movie) {  // if the movie ID is found and matches
+        res.locals.movie = movie; // store movie into res.locals
         return next();
     }
     next({ status: 404, message: `Movie cannot be found.` });
 }
 
 async function read(req, res) {
-    const { movie } = res.locals;
-    res.json({ movie });
+    const { movie } = res.locals; // destructure res.locals of movie
+    res.json({ movie }); // get movie
 }
 
 async function getTheaters(req, res) {
