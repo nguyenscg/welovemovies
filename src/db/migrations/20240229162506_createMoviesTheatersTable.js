@@ -13,7 +13,7 @@ exports.up = function(knex) {
         .references("theater_id") // references primary key 'theater_id'
         .inTable("theaters") // of theaters table
         .onDelete("CASCADE"); // if theater gets deleted, all movies will be deleted from database as well
-
+    table.boolean("is_showing");
     table.timestamps(true, true);
   });
 };
