@@ -1,4 +1,4 @@
-const moviesService = require("./movies.service");
+const service = require("./movies.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 // async function list(req, res) {
@@ -10,14 +10,14 @@ async function list(req, res, next) {
     const isShowing = req.query.is_showing;
 
     if (isShowing) {
-        res.json({ data: await moviesService.listMovie() })
+        res.json({ data: await service.listMovie() })
     } else {
         res.json({ data: await moviesService.list() })
     } 
 }
 
 async function movieExists(req, res, next) {
-    const movie = await moviesService.read(req.params.movie_id);
+    const movie = await service.read(req.params.movie_id);
     if (movie) {
         res.locals.movie = movie;
         return next();
@@ -32,19 +32,19 @@ async function read(req, res) {
 
 async function getTheaters(req, res) {
     const movieId = req.params.movie_id;
-    const theaters = await moviesService.getTheaters(movieId)
+    const theaters = await service.getTheaters(movieId)
     res.json({ data: theaters });
 }
 
 async function getReviews(req, res) {
     const movieId = req.params.movie_id;
-    const reviews = await moviesService.getReviews(movieId);
+    const reviews = await service.getReviews(movieId);
     res.json({ data: reviews });
 }
 
 module.exports = {
-    read: [asyncErrorBoundary(movieExists), read],
-    list: asyncErrorBoundary(list),
-    getReviews,
+    list: [asyncErrorBoundary(list)],
+    read: [asyncErrorBoundary(movieExists), asyncErrorBoundary(read)],
     getTheaters,
+    getReviews,
 };
