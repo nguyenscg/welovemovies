@@ -24,3 +24,4 @@ router.route("/").get(controller.list);
 
 // GET /movies?is_showing=true
 // In the event where `is_showing=true` is provided, the route should return _only those movies where the movie is currently showing in theaters._ This means you will need to check the `movies_theaters` table.
+module.exports = router;
