@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable("critics", (table) => {
-    table.increments("critics_id").primary(); // sets critics_id as primary key, unique id
+    table.increments("critic_id").primary(); // sets critics_id as primary key, unique id
     table.string("preferred_name"); // the critic's preferred first name that has a data type of string
     table.string("surname"); // the critic's last name that has a data type of string
     table.string("organization_name"); // the name of the organization the critic works for. data type is string
