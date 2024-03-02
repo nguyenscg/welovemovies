@@ -9,15 +9,18 @@ router // GET /movies endpoint
 
 router
   .route("/:movieId") // GET /movies/:movieId endpoint
-  .get(controller.read);
+  .get(controller.read)
+  .all(methodNotAllowed);
 
 router
   .route("/:movieId/theaters")
-  .get(controller.getTheaters);
+  .get(controller.getTheaters)
+  .all(methodNotAllowed);
 
 router
   .route("/:movieId/reviews")
-  .get(controller.getReviews);
+  .get(controller.getReviews)
+  .all(methodNotAllowed);
 
 
 module.exports = router;
