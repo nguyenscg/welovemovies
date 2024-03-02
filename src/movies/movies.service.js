@@ -63,6 +63,14 @@ function getReviews(movie_id) {
     .join("critics as c", "r.critic_id", "c.critic_id")
     .select("r.*", "c.preferred_name", "c.surname", "c.organization_name")
     .where({ "r.movie_id": movie_id })
+    .then(reviews => reviews.map(review => ({
+        ...review,
+        critic: {
+          preferred_name: review.preferred_name,
+          surname: review.surname,
+          organization_name: review.organization_name
+        }
+      })));
 }
 
 module.exports = {
