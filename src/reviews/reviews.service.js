@@ -6,10 +6,10 @@ const knex = require("../db/connection");
 // also need to get critic to update the reviews with: so create get critic function
 
 function read(review_id) {
-    return knex("reviews")
-        .select("*")
-        .where({ review_id: review_id })
-        .first();
+    return knex("reviews") // knex query reviews table
+        .select("*") // select all columns
+        .where({ review_id: review_id }) // filter results where 'review_id' matches argument
+        .first(); // returns the first
 }
 
 // get critic for each review
