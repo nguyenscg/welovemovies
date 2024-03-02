@@ -6,6 +6,7 @@ const cors = require("cors"); // require cors
 const router = express.Router();
 const moviesRouter = require("./movies/movies.router"); // require movies router
 const reviewsRouter = require("./reviews/reviews.router"); // require reviews router
+const theatersRouter = require("./theaters/theaters.router"); // require theaters router
 
 app.use(cors()); // enable cors for app to use
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/", router);
 app.use("/movies", moviesRouter);
 app.use("/reviews", reviewsRouter);
+app.use("/theaters", theatersRouter);
 
 app.use((req, res, next) => { // if a request is made to a route that does not exist, server returns a 404 error
     next({ status: 404, message: "That page doesn't exist." });
