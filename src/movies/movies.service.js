@@ -61,7 +61,7 @@ function getTheaters(movie_id) {
 function getReviews(movie_id) {
     return knex("reviews as r")
     .join("critics as c", "r.critic_id", "c.critic_id")
-    .select("r*")
+    .select("r.*", "c.preferred_name", "c.surname", "c.organization_name")
     .where({ "r.movie_id": movie_id })
 }
 
