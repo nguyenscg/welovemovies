@@ -13,12 +13,12 @@ router
   .all(methodNotAllowed);
 
 router
-  .route("/:movieId/theaters")
+  .route("/:movieId/theaters") // GET /movies/:movieId/theaters endpoint
   .get(controller.getTheaters)
   .all(methodNotAllowed);
 
 router
-  .route("/:movieId/reviews")
+  .route("/:movieId/reviews") // GET /movies/:movieId/reviews endpoint
   .get(controller.getReviews)
   .all(methodNotAllowed);
 
