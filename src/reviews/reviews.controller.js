@@ -1,4 +1,5 @@
 const service = require("./reviews.service"); // import service file
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 const hasRequiredProperties = hasProperties("score", "content");
 
@@ -37,4 +38,15 @@ async function update(req, res, next) {
       };
       const data = await service.update(updatedReview);
       res.json({ data });
+}
+
+async function destroy(req, res, next) {
+    const { review } = res.locals;
+    await service.delete(review);
+    res.sendStatus(204);
+}
+
+module.exports = {
+    update: [asyncErrorBoundary(reviewExists), hasScoreAndContent, hasRequiredProperties, asyncErrorBoundary(update)],
+    delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)]
 }
