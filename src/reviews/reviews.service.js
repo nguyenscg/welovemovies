@@ -16,10 +16,20 @@ const addCritic = mapProperties({
 // also need to get critic to update the reviews with: so create get critic function
 
 function read(review_id) {
-    return knex("reviews") // knex query reviews table
-        .select("*") // select all columns
-        .where({ review_id: review_id }) // filter results where 'review_id' matches argument
-        .first(); // returns the first
+    return knex("reviews as r") // knex query reviews table
+        .join("critics as c", "c.critic_id", "r.critic_id") // join critics c with alias c and link critic_id from both tables
+        .select(
+            "r.*",
+            "c.critic_id",
+            "c.preferred_name",
+            "c.surname",
+            "c.organization_name",
+            "c.created_at",
+            "c.updated_at"
+        )
+        .where({ review_id })
+        .first()
+        .then(addCritic);
 }
 
 // get critic for each review
@@ -55,6 +65,5 @@ function destroy(review_id) {
 module.exports = {
     read,
     update,
-    getCritic,
     delete: destroy,
 }
