@@ -4,14 +4,12 @@ const hasProperties = require("../errors/hasProperties");
 const hasRequiredProperties = hasProperties("score", "content");
 
 async function reviewExists(req, res, next) {
-    const { reviewId } = req.params;
-    const review = await service.read(reviewId)
-    
-    if(review) {
-        res.locals.review = review;
-        return next();
+    const review = await service.read(req.params.reviewId);
+    if (review) {
+      res.locals.review = review;
+      return next();
     }
-    return next({ status: 404, message: `Review cannot be found.` })
+    next({ status: 404, message: "Review cannot be found." });
 }
 
 function hasScoreAndContent(req, res, next) {
@@ -33,7 +31,6 @@ function hasScoreAndContent(req, res, next) {
 async function update(req, res, next) {
     const review = res.locals.review.review_id;
     const updatedReview = {
-        ...res.locals.review,
         ...req.body.data,
         review_id: res.locals.review.review_id,
       };
