@@ -31,7 +31,7 @@ const data = await service.update(updatedReview); */
 function update(updatedReview) {
     return knex("reviews") // reviews table
         .select("*")
-        .where({ "review_id": updatedReview.review_id })
+        .where({ review_id: updatedReview.review_id })
         .update(updatedReview, "*");
 }
 
