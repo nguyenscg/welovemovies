@@ -31,13 +31,14 @@ function hasScoreAndContent(req, res, next) {
 }
 
 async function update(req, res, next) {
+    const review = res.locals.review.review_id;
     const updatedReview = {
         ...res.locals.review,
         ...req.body.data,
         review_id: res.locals.review.review_id,
       };
-      const data = await service.update(updatedReview);
-      res.json({ data });
+      await service.update(updatedReview);
+      res.json({ data: await service.read(review) });
 }
 
 async function destroy(req, res, next) {
@@ -46,6 +47,6 @@ async function destroy(req, res, next) {
 }
 
 module.exports = {
-    update: [asyncErrorBoundary(reviewExists), hasScoreAndContent, hasRequiredProperties, asyncErrorBoundary(update)],
+    update: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(update)],
     delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)]
 }

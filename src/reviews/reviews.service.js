@@ -1,4 +1,14 @@
 const knex = require("../db/connection");
+const mapProperties = require("../utils/map-properties");
+
+const addCritic = mapProperties({
+    c_critic_id: "critic.critic_id",
+    preferred_name: "critic.preferred_name",
+    surname: "critic.surname",
+    organization_name: "critic.organization_name",
+    c_created_at: "critic.created_at",
+    c_updated_at: "critic.updated_at",
+  });
 
 // update /reviews/:reviewId
 // first make a read function to read the review_id
@@ -35,8 +45,7 @@ function update(updatedReview) {
     return knex("reviews") // reviews table
         .select("*")
         .where({ review_id: updatedReview.review_id })
-        .update(updatedReview, "*")
-        .then((updatedRecords) => updatedRecords[0]);
+        .update(updatedReview, "*");
 }
 
 function destroy(review_id) {
