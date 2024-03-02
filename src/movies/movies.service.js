@@ -1,19 +1,21 @@
-const knex = require("../db/connection"); // requires Knex instance that is initialized in db/connection.js
-const mapsProperties = require("../utils/map-properties");
+const knex = require('../db/connection')
+const mapProperties = require('../utils/map-properties')
 
 // This route will return a list of all movies. Different query parameters will allow for limiting the data that is returned.
-function list() { // GET all /movies endpoint
-    return knex("movies").select("*").groupBy("m.movie_id"); // knex query from movies table and return list of all movies
+function list() { // GET /movies endpoint
+    return knex('movies') // knex query movies table
+        .select('*') // select all columns
+        .groupBy('movies.movie_id') // group movies by movie_id
 }
 
-function listMovie() {
-    return knex("movies as m")
-        .join("movies_theaters as mt", "m.movie_id", "mt.movie_id")
-        .select("m.*")
-        .where({ "mt.is_showing": true })
-        .groupBy("m.movie_id")
+// this route will return a movie
+function listMovie() { 
+    return knex('movies as m') // knex query movies table and alias to m
+        .join('movies_theaters as mt', 'm.movie_id', 'mt.movie_id') // join movies_theaters table by ids from each table
+        .select('m.*') // select all columns in movies table
+        .where({ 'mt.is_showing': true }) // where the movies_table is_showing column is true
+        .groupBy('m.movie_id') // group the movies by movie ID
 }
-
 
 // READ one movie
 // this route will return a single movie by ID
@@ -23,7 +25,10 @@ function listMovie() {
 - `GET /movies/:movieId/theaters`
 - `GET /movies/:movieId/reviews` */
 function read(movie_id) { // GET /movies/:movieId endpoint
-    return knex("movies").select("*").where({ movie_id }).first();
+    return knex('movies') // knex query movies table
+        .select('*') // select all columns
+        .where({ movie_id })
+        .first()
 }
 
 
