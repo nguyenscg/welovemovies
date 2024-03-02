@@ -8,7 +8,7 @@ const knex = require("../db/connection");
 function read(review_id) {
     return knex("reviews")
         .select("*")
-        .where({ "review_id": review_id })
+        .where({ review_id: review_id })
         .first();
 }
 
@@ -16,7 +16,7 @@ function read(review_id) {
 function getCritic(critic_id) {
     return knex("critics") // query critics table
         .select("*")
-        .where({ "critic_id": critic_id })
+        .where({ critic_id: critic_id })
 }
 
 /*  Hint: Since the test requires a PUT method, you can update the review in the following manner:
@@ -32,7 +32,8 @@ function update(updatedReview) {
     return knex("reviews") // reviews table
         .select("*")
         .where({ review_id: updatedReview.review_id })
-        .update(updatedReview, "*");
+        .update(updatedReview, "*")
+        .then((updatedRecords) => updatedRecords[0]);
 }
 
 function destroy(review_id) {
