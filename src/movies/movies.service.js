@@ -2,7 +2,7 @@ const knex = require("../db/connection"); // requires Knex instance that is init
 
 // This route will return a list of all movies. Different query parameters will allow for limiting the data that is returned.
 function list() { // GET all /movies endpoint
-    return knex("movies").select("*"); // knex query from movies table and return list of all movies
+    return knex("movies").select("*").groupBy("m.movie_id"); // knex query from movies table and return list of all movies
 }
 
 function listMovie() {

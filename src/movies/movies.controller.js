@@ -17,7 +17,7 @@ async function list(req, res, next) {
 }
 
 async function movieExists(req, res, next) {
-    const movie = await service.read(req.params.movie_id); // query the movie_id
+    const movie = await service.read(req.params.movieId); // query the movie_id
     if (movie) {  // if the movie ID is found and matches
         res.locals.movie = movie; // store movie into res.locals
         return next();
@@ -26,18 +26,18 @@ async function movieExists(req, res, next) {
 }
 
 async function read(req, res) {
-    const { movie } = res.locals; // destructure res.locals of movie
-    res.json({ movie }); // get movie
+    // const { movie } = res.locals; // destructure res.locals of movie
+    res.json({ data: res.locals.movie }); // get movie
 }
 
 async function getTheaters(req, res) {
-    const movieId = req.params.movie_id;
+    const movieId = req.params;
     const theaters = await service.getTheaters(movieId)
     res.json({ data: theaters });
 }
 
 async function getReviews(req, res) {
-    const movieId = req.params.movie_id;
+    const movieId = req.params;
     const reviews = await service.getReviews(movieId);
     res.json({ data: reviews });
 }
