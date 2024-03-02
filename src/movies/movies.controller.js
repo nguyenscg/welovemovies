@@ -31,13 +31,13 @@ async function read(req, res) {
 }
 
 async function getTheaters(req, res) {
-    const movieId = req.params;
+    const { movieId } = req.params;
     const theaters = await service.getTheaters(movieId)
     res.json({ data: theaters });
 }
 
 async function getReviews(req, res) {
-    const movieId = req.params;
+    const { movieId } = req.params;
     const reviews = await service.getReviews(movieId);
     res.json({ data: reviews });
 }
@@ -45,6 +45,6 @@ async function getReviews(req, res) {
 module.exports = {
     list: [asyncErrorBoundary(list)],
     read: [asyncErrorBoundary(movieExists), asyncErrorBoundary(read)],
-    getTheaters,
     getReviews,
+    getTheaters,
 };
