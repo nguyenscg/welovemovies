@@ -41,8 +41,7 @@ async function update(req, res, next) {
 }
 
 async function destroy(req, res, next) {
-    const { review } = res.locals;
-    await service.delete(review);
+    await service.delete(res.locals.review.review_id);
     res.sendStatus(204);
 }
 
