@@ -1,4 +1,6 @@
 const service = require("./reviews.service"); // import service file
+const hasProperties = require("../errors/hasProperties");
+const hasRequiredProperties = hasProperties("score", "content");
 
 async function reviewExists(req, res, next) {
     const { reviewId } = req.params;
@@ -25,4 +27,14 @@ function hasScoreAndContent(req, res, next) {
     }
     res.locals.update = updateReview;
     next();
+}
+
+async function update(req, res, next) {
+    const updatedReview = {
+        ...res.locals.review,
+        ...req.body.data,
+        review_id: response.locals.review.review_id,
+      };
+      const data = await service.update(updatedReview);
+      res.json({ data });
 }
