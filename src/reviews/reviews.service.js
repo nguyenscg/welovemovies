@@ -19,6 +19,9 @@ function getCritic(critic_id) {
         .where({ critic_id: critic_id })
 }
 
+// Create a route that responds to the following request: PUT /reviews/:reviewId
+// The response should include the entire review record with the newly patched content, and the critic information set to the `critic` property.
+
 /*  Hint: Since the test requires a PUT method, you can update the review in the following manner:
 ```js
 const updatedReview = {
