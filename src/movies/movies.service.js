@@ -1,4 +1,5 @@
 const knex = require("../db/connection"); // requires Knex instance that is initialized in db/connection.js
+const mapsProperties = require("../utils/map-properties");
 
 // This route will return a list of all movies. Different query parameters will allow for limiting the data that is returned.
 function list() { // GET all /movies endpoint
